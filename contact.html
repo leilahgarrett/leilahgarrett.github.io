@@ -30,22 +30,22 @@
     <footer>
         <p>&copy; 2024 My Website</p>
     </footer>
-    <script src="script.js"></script>
     <script>
-        document.getElementById('myForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
 
-            const formData = new FormData(this);
-            fetch('/submit', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+        const formData = new FormData(this);
+        fetch('/submit', {
+            method: 'POST',
+            body: new URLSearchParams(formData) // Use URLSearchParams for form data
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('message').textContent = data;
+            this.reset(); // Reset the form
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
 </body>
 </html>
