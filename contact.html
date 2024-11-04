@@ -31,5 +31,21 @@
         <p>&copy; 2024 My Website</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this);
+            fetch('/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>
